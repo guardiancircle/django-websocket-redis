@@ -49,7 +49,7 @@ class uWSGIWebsocket(object):
 
 class uWSGIWebsocketServer(WebsocketWSGIServer):
     def upgrade_websocket(self, environ, start_response):
-        uwsgi.websocket_handshake(environ['HTTP_SEC_WEBSOCKET_KEY'], environ.get('HTTP_ORIGIN', ''))
+        uwsgi.websocket_handshake(environ.get('HTTP_SEC_WEBSOCKET_KEY', 'MISSING-KEY'), environ.get('HTTP_ORIGIN', ''))
         return uWSGIWebsocket()
 
     def select(self, rlist, wlist, xlist, timeout=None):
